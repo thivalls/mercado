@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using mercado.Data;
 using mercado.DTO;
@@ -29,19 +30,25 @@ namespace mercado.Controllers
             return Content(categoriaDTO.Nome);
         }
 
-        [HttpPut]
+        [HttpPost]
         public IActionResult Update(CategoriaDTO categoriaDTO) {
             if(ModelState.IsValid){
-                Categoria categoria = new Categoria();
+                var categoria = database.Categorias.First(cat => cat.Id == categoriaDTO.Id);
                 categoria.Nome = categoriaDTO.Nome;
-                categoria.Status = true;
-                database.Categorias.Add(categoria);
                 database.SaveChanges();
                 return RedirectToAction("Categorias","Gestao");
             }else {
                 return View("../Gestao/NovaCategoria");
             }
             return Content(categoriaDTO.Nome);
+        }
+
+        [HttpPost]
+        public IActionResult Deletar(int id) {
+            var categoria = database.Categorias.First(cat => cat.Id == id);
+            categoria.Status = false;
+            database.SaveChanges();
+            return RedirectToAction("Categorias","Gestao");
         }
     }
 }

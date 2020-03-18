@@ -7,8 +7,8 @@
 <h1>Editando categoria</h1>
 <hr>
 
-<form class="form form-horizontal" asp-action="Store" asp-controller="Categorias" method="POST">
-    <input type="hidden" asp-for="Id" value="0">
+<form class="form form-horizontal" asp-action="Update" asp-controller="Categorias" method="POST">
+    <input type="hidden" asp-for="Id">
     <div class="form-group">
         <label asp-for="Nome">Nome</label>
         <input type="text" class="form-control" asp-for="Nome" placeholder="Nome da categoria">
