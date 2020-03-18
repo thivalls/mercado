@@ -1,0 +1,53 @@
+@model mercado.DTO.ProdutoDTO
+
+@{
+    Layout = "_LayoutAdmin";
+}
+
+<h1>Novo Produto</h1>
+<hr>
+
+<form class="form form-horizontal" asp-action="Store" asp-controller="Produtos" method="POST">
+    <input type="hidden" asp-for="Id" value="0">
+    <div class="form-group">
+        <label asp-for="Nome">Nome</label>
+        <input type="text" class="form-control" asp-for="Nome" placeholder="Nome do fornecedor">
+        <span asp-validation-for="Nome" style="color: red"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CategoriaID">Categoria</label>
+        <select class="form-control" asp-for="CategoriaID" asp-items='@(new SelectList(@ViewBag.Categorias, "Id", "Nome"))'></select>
+        <span asp-validation-for="CategoriaID" style="color: red"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="FornecedorID">Fornecedores</label>
+        <select class="form-control" asp-for="FornecedorID" asp-items='@(new SelectList(@ViewBag.Fornecedores, "Id", "Nome"))'></select>
+        <span asp-validation-for="FornecedorID" style="color: red"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PrecoDeCusto">Preço de Custo</label>
+        <input type="number" step="any" class="form-control" asp-for="PrecoDeCusto" placeholder="Preço de custo do produto">
+        <span asp-validation-for="PrecoDeCusto" style="color: red"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PrecoDeVenda">Preço de Venda</label>
+        <input type="number" step="any" class="form-control" asp-for="PrecoDeVenda" placeholder="Preço de venda do produto">
+        <span asp-validation-for="PrecoDeVenda" style="color: red"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Medicao">Medição</label>
+        <select class="form-control" asp-for="Medicao">
+            <option value="0">Litro</option>
+            <option value="1">Kilo</option>
+            <option value="2">Unidade</option>
+        </select>
+        <span asp-validation-for="Medicao" style="color: red"></span>
+    </div>
+    
+    <input class="btn btn-success" type="submit" value="Cadastrar">
+</form>
